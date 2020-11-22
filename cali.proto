@@ -1,0 +1,49 @@
+syntax = "proto2";
+import "google/protobuf/wrappers.proto";
+
+message Band{
+    required string band_ = 1;
+}
+message Songs{
+    required string title = 1;
+    required string genre = 2;
+    required string platform =3;
+}
+message Date{
+    required string day = 1;
+    required string  month = 2;
+    required string year = 3;
+}
+message writeNewRecord{
+    repeated Record record = 1;
+
+}
+message updateRecord{
+    required string id = 1;
+    required writeNewRecord version =2;
+
+}
+
+
+message readRecord{
+    optional string id = 1;
+    optional Record record = 2;
+    optional string creterion = 3;
+}
+message Record
+{
+    required string Id =1;
+    optional Date date = 2;
+    required string name =3;
+    required string member = 4;
+    required Band band = 5;
+    required Songs songs = 6;
+
+}
+service cali{
+    
+    rpc saveRecord (writeNewRecord) returns (writeNewRecord);
+    rpc changeRecord (updateRecord) returns (updateRecord);
+    rpc displayRecord (readRecord) returns (readRecord);
+}
+
